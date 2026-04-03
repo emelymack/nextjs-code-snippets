@@ -4,17 +4,14 @@ import { redirect } from 'next/navigation';
 export default function SnippetCreatePage() {
 
   async function createSnippet(formData: FormData) {
-    // This need to be a server action
-
+    // Configure as server action
     'use server';
 
-    // Check the uset's inputs and make sure they're valid
-
+    // Check the user's inputs and make sure they're valid
     const title = formData.get('title') as string;
     const code = formData.get('code') as string;
 
     // Create a new record in the database
-
     const snippet = await db.snippet.create({
       data: {
         title,
@@ -23,10 +20,8 @@ export default function SnippetCreatePage() {
     })
 
     console.log(snippet);
-    
 
     // Redirect the user back to the root route
-
     redirect('/');
   }
 
